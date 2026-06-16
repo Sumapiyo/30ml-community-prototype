@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>パターン3：Wiki/百科型｜30ML COMMUNITY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{--brand:#0B5FFF;--cta:#E4007F;--ink:#111418;--ink-2:#6B7280;--ink-3:#9CA3AF;--line:#E8EAED;--bg:#F8F9FB;--redlink:#C0362C;--soft:#F3F4F6;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Noto Sans JP',system-ui,sans-serif;background:#ECEDEF;color:var(--ink);display:flex;justify-content:center;padding:24px 16px}
+  .phone{width:390px;height:812px;background:#fff;border-radius:30px;overflow:hidden;position:relative;box-shadow:0 10px 44px rgba(0,0,0,.18)}
+  .screen{position:absolute;inset:0;display:flex;flex-direction:column;background:#fff;transition:transform .28s ease}
+  .screen.list{z-index:1}.screen.detail{z-index:2;transform:translateX(100%)}.screen.detail.show{transform:translateX(0)}
+
+  .head{padding:14px 16px 10px;border-bottom:1px solid var(--line)}
+  .head .t{display:flex;align-items:center;justify-content:space-between}
+  .head h1{font-size:18px;font-weight:900}.head .ic{display:flex;gap:14px;font-size:18px}
+  .scrollwrap{flex:1;overflow-y:auto;scrollbar-width:none}.scrollwrap::-webkit-scrollbar{display:none}
+  .wrap{padding:14px 16px 24px}
+  .tags{display:flex;gap:7px;overflow-x:auto;padding-bottom:12px;scrollbar-width:none}.tags::-webkit-scrollbar{display:none}
+  .tag{flex:0 0 auto;border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12px;font-weight:500;color:#374151;background:#fff}
+  .tag.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .meta-top{font-size:11.5px;color:var(--ink-2);margin-bottom:6px}
+
+  .item{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+  .thumb{flex:0 0 52px;width:52px;height:52px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative}
+  .thumb .fig{width:42%;aspect-ratio:1/1.9;border-radius:16px 16px 7px 7px;position:relative}
+  .thumb .fig::before{content:"";position:absolute;top:-12%;left:50%;transform:translateX(-50%);width:52%;aspect-ratio:1/1;border-radius:50%;background:inherit;filter:brightness(1.1)}
+  .thumb.empty{background:var(--soft)}.thumb.empty::after{content:"?";font-size:20px;font-weight:700;color:var(--ink-3)}
+  .ib{flex:1;min-width:0}.ib .nm{font-size:14px;font-weight:700;line-height:1.35}
+  .ib .id{font-size:11px;color:var(--ink-3);font-weight:500;margin-right:6px}
+  .ib .mt{font-size:11px;color:var(--ink-2);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap}
+  .chev{color:var(--ink-3);font-size:16px}
+  .badge{font-size:10px;font-weight:700;border-radius:5px;padding:1px 7px}
+  .badge.multi{background:#FEF3C7;color:#92400E}.badge.solo{background:#ECFDF5;color:#15803D}
+  .item.empty .nm{color:var(--redlink)}.item.empty .nm::after{content:" · 未作成";font-size:11px;font-weight:500}
+  .item.empty .mt{color:var(--redlink)}
+  .p1{background:radial-gradient(110% 80% at 50% 12%,#EAF1FF,#D6E4FF)}.p1 .fig{background:linear-gradient(160deg,#7fb2ff,#1d4ed8)}
+  .p2{background:radial-gradient(110% 80% at 50% 12%,#FDEEF3,#F7D9E5)}.p2 .fig{background:linear-gradient(160deg,#ff8aa1,#c01d49)}
+
+  /* detail = wiki page */
+  .dscroll{flex:1;overflow-y:auto;scrollbar-width:none}.dscroll::-webkit-scrollbar{display:none}
+  .appbar{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--line)}
+  .appbar .b{font-size:20px;cursor:pointer}.appbar .ti{font-size:13px;font-weight:700;color:var(--ink-2)}
+  .hero{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:radial-gradient(110% 80% at 50% 12%,#EAF1FF,#D6E4FF)}
+  .hero .fig{width:40%;aspect-ratio:1/2;border-radius:46px 46px 18px 18px;background:linear-gradient(160deg,#7fb2ff,#1d4ed8);position:relative}
+  .hero .fig::before{content:"";position:absolute;top:-12%;left:50%;transform:translateX(-50%);width:52%;aspect-ratio:1/1;border-radius:50%;background:inherit;filter:brightness(1.1)}
+  .dwrap{padding:16px}
+  .did{font-size:12px;color:var(--ink-3);font-weight:700;letter-spacing:.04em}
+  .dt{font-size:21px;font-weight:900;margin:2px 0 4px}
+  .dtags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .infobox{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:16px}
+  .infobox .r{display:flex;font-size:12.5px;border-bottom:1px solid var(--line)}.infobox .r:last-child{border-bottom:none}
+  .infobox .k{flex:0 0 96px;background:var(--soft);padding:8px 10px;font-weight:700;color:#374151}
+  .infobox .v{padding:8px 10px}.infobox .v a{color:var(--brand);text-decoration:none}.infobox .v .rl{color:var(--redlink)}
+  .h2{font-size:14px;font-weight:900;margin:18px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+  .body-empty{background:var(--soft);border-radius:10px;padding:14px;font-size:12.5px;color:var(--ink-2);line-height:1.7;text-align:center}
+  .interp{border:1px solid var(--line);border-radius:10px;padding:11px 12px;margin-bottom:9px}
+  .interp .who{font-size:11px;color:var(--ink-2);margin-bottom:3px}.interp .what{font-size:13px;font-weight:700}
+  .relworks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+  .rw .rwt{aspect-ratio:1/1;border-radius:10px;background:#0e0f13;display:flex;align-items:center;justify-content:center}
+  .rw .rwt .f{width:40%;aspect-ratio:1/2;border-radius:16px 16px 7px 7px;background:linear-gradient(160deg,#86d99c,#1f7a3d)}
+  .rw .rwn{font-size:11.5px;font-weight:700;margin-top:5px}.rw .rwa{font-size:10.5px;color:var(--ink-2)}
+
+  .nav{display:flex;justify-content:space-around;padding:8px 0 11px;border-top:1px solid var(--line);background:#fff;font-size:10px;color:var(--ink-3)}
+  .nav .it{display:flex;flex-direction:column;align-items:center;gap:3px}.nav .it.on{color:var(--brand)}.nav .ic{font-size:17px;line-height:1}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- 目録 -->
+  <div class="screen list">
+    <div class="head"><div class="t"><h1>設定アーカイブ</h1><div class="ic"><span>🔍</span><span>🔔</span></div></div></div>
+    <div class="scrollwrap"><div class="wrap">
+      <div class="tags"><span class="tag on">すべて</span><span class="tag">30MS</span><span class="tag">30MF</span><span class="tag">騎士</span><span class="tag">メカ娘</span></div>
+      <div class="meta-top">登録 124件 / 設定あり 18件</div>
+      <div class="item" onclick="openD()"><div class="thumb p1"><div class="fig"></div></div><div class="ib"><div class="nm"><span class="id">#001</span>リーベルソードマン</div><div class="mt"><span class="badge multi">解釈14件</span><span>作例 38</span></div></div><span class="chev">›</span></div>
+      <div class="item" onclick="openD()"><div class="thumb p2"><div class="fig"></div></div><div class="ib"><div class="nm"><span class="id">#002</span>ターボコスチュームα</div><div class="mt"><span class="badge solo">解釈3件</span><span>作例 12</span></div></div><span class="chev">›</span></div>
+      <div class="item empty" onclick="openD()"><div class="thumb empty"></div><div class="ib"><div class="nm"><span class="id">#003</span>バックパック Wing</div><div class="mt"><span>設定の書き手を募集中</span></div></div><span class="chev">›</span></div>
+      <div class="item empty" onclick="openD()"><div class="thumb empty"></div><div class="ib"><div class="nm"><span class="id">#004</span>キャノンバイク Ver.</div><div class="mt"><span>設定の書き手を募集中</span></div></div><span class="chev">›</span></div>
+      <div class="item empty" onclick="openD()"><div class="thumb empty"></div><div class="ib"><div class="nm"><span class="id">#005</span>デカール No.3 武装紋章</div><div class="mt"><span>設定の書き手を募集中</span></div></div><span class="chev">›</span></div>
+      <div class="item empty" onclick="openD()"><div class="thumb empty"></div><div class="ib"><div class="nm"><span class="id">#006</span>アルト フェイスパーツ A</div><div class="mt"><span>設定の書き手を募集中</span></div></div><span class="chev">›</span></div>
+    </div></div>
+    <div class="nav"><div class="it"><span class="ic">⌂</span>ホーム</div><div class="it on"><span class="ic">◎</span>二次創作</div><div class="it"><span class="ic">▤</span>データベース</div><div class="it"><span class="ic">🛍</span>ストア</div><div class="it"><span class="ic">○</span>マイページ</div></div>
+  </div>
+
+  <!-- 項目ページ -->
+  <div class="screen detail" id="detail">
+    <div class="dscroll">
+      <div class="appbar"><span class="b" onclick="closeD()">‹</span><span class="ti">設定アーカイブ / 目録</span></div>
+      <div class="hero"><div class="fig"></div></div>
+      <div class="dwrap">
+        <div class="did">#001</div><div class="dt">リーベルソードマン</div>
+        <div class="dtags"><span class="tag">30MF</span><span class="tag">騎士</span><span class="badge multi">解釈14件</span></div>
+        <div class="infobox">
+          <div class="r"><div class="k">レーベル</div><div class="v">30MF</div></div>
+          <div class="r"><div class="k">カテゴリ</div><div class="v">ボディ</div></div>
+          <div class="r"><div class="k">関連項目</div><div class="v"><a>#002 ターボコスチューム</a> / <span class="rl">#019（未作成）</span></div></div>
+          <div class="r"><div class="k">作例</div><div class="v">38件</div></div>
+        </div>
+        <div class="h2">概要</div>
+        <div class="body-empty">この項目には確定した設定がありません。<br>同じ素体に複数の解釈が並立しているため、ひとつの「概要」を記述できない状態です。</div>
+        <div class="h2">並立する解釈</div>
+        <div class="interp"><div class="who">323号 の解釈</div><div class="what">夜明けの騎士 — 光の盟約を守る守護者</div></div>
+        <div class="interp"><div class="who">aoi の解釈</div><div class="what">堕ちた魔剣士 — 闇に転じた同一存在</div></div>
+        <div class="interp"><div class="who">霜月りく の解釈</div><div class="what">出自・性別ともに上記と矛盾する第三の解釈</div></div>
+        <div class="h2">この項目の作例</div>
+        <div class="relworks">
+          <div class="rw"><div class="rwt"><div class="f"></div></div><div class="rwn">夜明けの騎士・ルルチェ</div><div class="rwa">霜月りく</div></div>
+          <div class="rw"><div class="rwt"><div class="f"></div></div><div class="rwn">堕ちた魔剣士／別解釈</div><div class="rwa">aoi</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="nav"><div class="it"><span class="ic">⌂</span>ホーム</div><div class="it on"><span class="ic">◎</span>二次創作</div><div class="it"><span class="ic">▤</span>データベース</div><div class="it"><span class="ic">🛍</span>ストア</div><div class="it"><span class="ic">○</span>マイページ</div></div>
+  </div>
+
+</div>
+<script>
+  function openD(){document.getElementById('detail').classList.add('show');}
+  function closeD(){document.getElementById('detail').classList.remove('show');}
+</script>
+</body>
+</html>

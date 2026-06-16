@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30ML COMMUNITY — プロトタイプ比較</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Noto Sans JP',system-ui,sans-serif;background:#ECEDEF;color:#111418;min-height:100vh;padding:40px 24px 60px}
+  h1{font-size:22px;font-weight:900;margin-bottom:4px}
+  .sub{font-size:13px;color:#6B7280;margin-bottom:36px}
+  .grid{display:flex;flex-wrap:wrap;gap:32px;justify-content:center}
+  .card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 6px 32px rgba(0,0,0,.12);width:340px;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .18s ease,box-shadow .18s ease}
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 44px rgba(0,0,0,.18)}
+  .preview{width:100%;aspect-ratio:9/16;border:none;pointer-events:none;display:block;transform-origin:top left;background:#f8f9fb}
+  .info{padding:18px 20px 20px}
+  .label{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:#0B5FFF;border:1.3px solid #0B5FFF;border-radius:6px;padding:2px 8px;margin-bottom:8px}
+  .title{font-size:16px;font-weight:900;margin-bottom:5px}
+  .desc{font-size:12.5px;color:#6B7280;line-height:1.7}
+  .open{display:inline-block;margin-top:14px;background:#111418;color:#fff;border-radius:999px;padding:9px 20px;font-size:12.5px;font-weight:700;text-decoration:none}
+  .open:hover{background:#0B5FFF}
+  header{margin-bottom:36px;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <h1>30ML COMMUNITY</h1>
+  <p class="sub">二次創作フィード — UIパターン比較プロトタイプ</p>
+</header>
+<div class="grid">
+  <div class="card">
+    <div class="info">
+      <span class="label">PATTERN 1</span>
+      <div class="title">混在フィード</div>
+      <div class="desc">イラスト・SS・動画・作例をすべて同じフィードに並べるPinterest型。コンテンツの多様性を一覧で伝えられる。</div>
+      <a class="open" href="proto-pattern1.html" target="_blank">開いてみる →</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="info">
+      <span class="label">PATTERN 2</span>
+      <div class="title">編集された入口</div>
+      <div class="desc">特集バナー＋カテゴリ別横スクロールの構成。編集部の意図を伝えながら、種別ごとに探しやすい。</div>
+      <a class="open" href="proto-pattern2.html" target="_blank">開いてみる →</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="info">
+      <span class="label">PATTERN 3</span>
+      <div class="title">Wiki / 百科型</div>
+      <div class="desc">キット・素体ごとに設定・解釈・作例を集約するデータベース構造。深く掘り下げたいユーザー向け。</div>
+      <a class="open" href="proto-pattern3.html" target="_blank">開いてみる →</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

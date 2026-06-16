@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>パターン1：混在フィード｜30ML COMMUNITY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand:#0B5FFF; --cta:#E4007F; --ink:#111418; --ink-2:#6B7280; --ink-3:#9CA3AF;
+    --line:#E8EAED; --bg:#F8F9FB; --soft:#F3F4F6; --ok:#15803D; --warn:#B45309;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Noto Sans JP',system-ui,sans-serif;background:#ECEDEF;color:var(--ink);
+       display:flex;justify-content:center;padding:24px 16px}
+  .phone{width:390px;height:812px;background:#fff;border-radius:30px;overflow:hidden;position:relative;
+         box-shadow:0 10px 44px rgba(0,0,0,.18)}
+  .screen{position:absolute;inset:0;display:flex;flex-direction:column;background:#fff;
+          transition:transform .28s ease, opacity .28s ease}
+  .screen.list{z-index:1}
+  .screen.detail{z-index:2;transform:translateX(100%)}
+  .screen.detail.show{transform:translateX(0)}
+
+  /* shared header */
+  .head{padding:14px 16px 6px}
+  .head .t{display:flex;align-items:center;justify-content:space-between}
+  .head h1{font-size:19px;font-weight:900}
+  .head .ic{display:flex;gap:14px;font-size:18px}
+  .filters{display:flex;gap:7px;overflow-x:auto;padding:12px 16px 4px;scrollbar-width:none}
+  .filters::-webkit-scrollbar{display:none}
+  .fchip{flex:0 0 auto;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 13px;font-size:12.5px;font-weight:500;color:#374151;cursor:pointer}
+  .fchip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .sort{display:flex;gap:16px;padding:10px 16px 4px;font-size:12.5px;color:var(--ink-3);font-weight:500}
+  .sort .on{color:var(--ink);font-weight:700}
+
+  .feedwrap{flex:1;overflow-y:auto;scrollbar-width:none}
+  .feedwrap::-webkit-scrollbar{display:none}
+  .feed{padding:8px 16px 16px;column-count:2;column-gap:10px}
+  .card{break-inside:avoid;margin-bottom:10px;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer}
+  .thumb{position:relative;display:flex;align-items:center;justify-content:center}
+  .thumb .fig{width:42%;aspect-ratio:1/2;border-radius:44px 44px 18px 18px;position:relative;margin:14px 0}
+  .thumb .fig::before{content:"";position:absolute;top:-12%;left:50%;transform:translateX(-50%);width:52%;aspect-ratio:1/1;border-radius:50%;background:inherit;filter:brightness(1.1)}
+  .mt{position:absolute;top:7px;left:7px;background:rgba(255,255,255,.93);border-radius:7px;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px;box-shadow:0 1px 4px rgba(0,0,0,.08)}
+  .dur{position:absolute;right:7px;bottom:7px;background:rgba(0,0,0,.7);color:#fff;font-size:10px;padding:1px 6px;border-radius:5px}
+  .cmeta{padding:8px 10px 10px}
+  .cmeta .tt{font-size:12.5px;font-weight:700;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .basetag{display:inline-block;margin-top:6px;font-size:10px;color:#374151;border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+  .au{display:flex;align-items:center;gap:5px;margin-top:6px;font-size:11px;color:var(--ink-2)}
+  .ava{width:16px;height:16px;border-radius:50%;background:linear-gradient(135deg,#c7d2fe,#a5b4fc);flex:0 0 auto}
+  .stat{margin-left:auto;color:var(--ink-3);font-size:10.5px}
+
+  .g1{background:radial-gradient(110% 80% at 50% 12%,#EAF1FF,#D6E4FF)} .g1 .fig{background:linear-gradient(160deg,#7fb2ff,#1d4ed8)}
+  .g2{background:radial-gradient(110% 80% at 50% 12%,#FDEEF3,#F7D9E5)} .g2 .fig{background:linear-gradient(160deg,#ff8aa1,#c01d49)}
+  .g3{background:radial-gradient(110% 80% at 50% 12%,#EFF7EE,#DBEEDB)} .g3 .fig{background:linear-gradient(160deg,#86d99c,#1f7a3d)}
+  .g4{background:radial-gradient(110% 80% at 50% 12%,#F3F0FB,#E6DEF8)} .g4 .fig{background:linear-gradient(160deg,#c4b5fd,#6d28d9)}
+  .g5{background:radial-gradient(110% 80% at 50% 12%,#FFF7E8,#FCEBC8)} .g5 .fig{background:linear-gradient(160deg,#fcd34d,#b45309)}
+  .g6{background:radial-gradient(110% 80% at 50% 12%,#EAFBFB,#CFF0F0)} .g6 .fig{background:linear-gradient(160deg,#67e8f9,#0e7490)}
+  .tall .fig{aspect-ratio:1/2.5} .short .fig{aspect-ratio:1/1.4}
+
+  /* ===== detail ===== */
+  .dscroll{flex:1;overflow-y:auto;scrollbar-width:none}
+  .dscroll::-webkit-scrollbar{display:none}
+  .appbar{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:linear-gradient(180deg,rgba(0,0,0,.32),transparent)}
+  .appbar .b{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer}
+  .appbar .r{display:flex;gap:8px}
+  .hero{position:relative;aspect-ratio:1/1;background:#0e0f13;display:flex;align-items:center;justify-content:center}
+  .hero .fig{width:42%;aspect-ratio:1/2.1;border-radius:60px 60px 26px 26px;background:linear-gradient(160deg,#7fb2ff,#1d4ed8);position:relative}
+  .hero .fig::before{content:"";position:absolute;top:-13%;left:50%;transform:translateX(-50%);width:52%;aspect-ratio:1/1;border-radius:50%;background:inherit;filter:brightness(1.12)}
+  .hmt{position:absolute;top:54px;left:14px;background:rgba(255,255,255,.92);border-radius:7px;padding:3px 9px;font-size:11px;font-weight:700}
+  .dbody{padding:16px}
+  .label{display:inline-block;border:1.3px solid var(--brand);color:var(--brand);font-size:11px;font-weight:700;border-radius:7px;padding:2px 9px;margin-bottom:7px}
+  .dtitle{font-size:20px;font-weight:900;line-height:1.35}
+  .author{display:flex;align-items:center;gap:9px;margin-top:12px}
+  .author .ava{width:36px;height:36px}
+  .author .nm{font-size:13.5px;font-weight:700}
+  .author .fo{margin-left:auto;border:1.5px solid var(--brand);color:var(--brand);border-radius:999px;padding:6px 16px;font-size:12.5px;font-weight:700}
+  .react{display:flex;gap:18px;margin-top:14px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-2)}
+  .react b{color:var(--ink)}
+  .caption{font-size:13.5px;line-height:1.9;margin:14px 0;color:#374151}
+  .tagrow{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+  .tg{border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12px;color:#374151;font-weight:500}
+  .sec{margin-bottom:20px}
+  .sechd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+  .sechd h2{font-size:14.5px;font-weight:900} .sechd a{font-size:12px;color:var(--brand)}
+  .kit{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .kit:last-of-type{border-bottom:none}
+  .kthumb{flex:0 0 46px;width:46px;height:46px;border-radius:9px;background:var(--soft);display:flex;align-items:center;justify-content:center}
+  .kthumb .f{width:42%;aspect-ratio:1/1.8;border-radius:13px 13px 6px 6px;background:linear-gradient(160deg,#9aa1ad,#3b404b)}
+  .kinfo{flex:1;min-width:0}.kinfo .kn{font-size:12.5px;font-weight:500;line-height:1.4}.kinfo .kp{font-size:11.5px;color:var(--ink-2);margin-top:2px}
+  .own{font-size:11px;font-weight:700;color:var(--ok)} .miss{font-size:11px;color:var(--ink-3)}
+  .needbar{background:#FFF7ED;border:1px solid #FCD9A8;border-radius:10px;padding:11px 13px;margin-top:11px;display:flex;align-items:center;justify-content:space-between}
+  .needbar .tx{font-size:12.5px;font-weight:700;color:var(--warn)}
+  .needbar .cta{background:var(--cta);color:#fff;border:none;border-radius:999px;padding:8px 16px;font-size:12px;font-weight:700;font-family:inherit}
+  .baseCta{display:block;width:100%;border:1.5px solid var(--ink);background:#fff;color:var(--ink);border-radius:13px;padding:14px;font-size:14.5px;font-weight:700;font-family:inherit;margin-bottom:20px}
+  .lineage{background:var(--soft);border-radius:12px;padding:13px}
+  .lineage .from{font-size:12px;color:var(--ink-2);margin-bottom:9px}.lineage .from a{color:var(--brand);font-weight:700}
+  .derivenote{font-size:12px;color:var(--ok);font-weight:700;margin-bottom:9px}
+  .drail{display:flex;gap:9px;overflow-x:auto;scrollbar-width:none}.drail::-webkit-scrollbar{display:none}
+  .dcard{flex:0 0 92px}
+  .dthumb{width:92px;height:92px;border-radius:9px;background:#0e0f13;display:flex;align-items:center;justify-content:center}
+  .dthumb .f{width:42%;aspect-ratio:1/2;border-radius:14px 14px 6px 6px;background:linear-gradient(160deg,#ff8aa1,#c01d49)}
+  .dcard .dn{font-size:10.5px;color:var(--ink-2);margin-top:4px}
+  .rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .rthumb{aspect-ratio:1/1;border-radius:11px;background:#0e0f13;display:flex;align-items:center;justify-content:center}
+  .rthumb .f{width:40%;aspect-ratio:1/2;border-radius:18px 18px 8px 8px;background:linear-gradient(160deg,#86d99c,#1f7a3d)}
+  .rc .rn{font-size:12px;font-weight:700;margin-top:6px}.rc .ra{font-size:11px;color:var(--ink-2);margin-top:2px}
+
+  .nav{display:flex;justify-content:space-around;padding:8px 0 11px;border-top:1px solid var(--line);background:#fff;font-size:10px;color:var(--ink-3)}
+  .nav .it{display:flex;flex-direction:column;align-items:center;gap:3px}
+  .nav .it.on{color:var(--brand)} .nav .ic{font-size:17px;line-height:1}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- 一覧 -->
+  <div class="screen list">
+    <div class="head"><div class="t"><h1>二次創作</h1><div class="ic"><span>🔍</span><span>🔔</span></div></div></div>
+    <div class="filters">
+      <div class="fchip on">すべて</div><div class="fchip">🖼 イラスト</div><div class="fchip">📖 SS</div><div class="fchip">🎬 動画</div><div class="fchip">🔧 作例</div>
+    </div>
+    <div class="sort"><span class="on">人気</span><span>新着</span><span>素体から探す</span></div>
+    <div class="feedwrap"><div class="feed">
+      <div class="card tall" onclick="openD()"><div class="thumb g1"><span class="mt">🔧</span><div class="fig"></div></div><div class="cmeta"><div class="tt">ライダースーツ ルルチェ＆ミコルル</div><span class="basetag">+5キット</span><div class="au"><span class="ava"></span>323号<span class="stat">♡540</span></div></div></div>
+      <div class="card short" onclick="openD()"><div class="thumb g2"><span class="mt">📖</span><div class="fig"></div></div><div class="cmeta"><div class="tt">鋼の花嫁、夜明けを待つ</div><span class="basetag">ターボα</span><div class="au"><span class="ava"></span>nagi<span class="stat">♡88</span></div></div></div>
+      <div class="card" onclick="openD()"><div class="thumb g4"><span class="mt">🎬</span><div class="fig"></div><span class="dur">0:42</span></div><div class="cmeta"><div class="tt">魔剣士アクション</div><span class="basetag">リーベル</span><div class="au"><span class="ava"></span>323号<span class="stat">▶1.2k</span></div></div></div>
+      <div class="card tall" onclick="openD()"><div class="thumb g3"><span class="mt">🖼</span><div class="fig"></div></div><div class="cmeta"><div class="tt">夜明けの騎士・ルルチェ</div><span class="basetag">リーベル</span><div class="au"><span class="ava"></span>霜月りく<span class="stat">♡412</span></div></div></div>
+      <div class="card short" onclick="openD()"><div class="thumb g5"><span class="mt">🖼</span><div class="fig"></div></div><div class="cmeta"><div class="tt">街角のメカ娘たち</div><span class="basetag">プリンシパル</span><div class="au"><span class="ava"></span>mei<span class="stat">♡173</span></div></div></div>
+      <div class="card" onclick="openD()"><div class="thumb g6"><span class="mt">🔧</span><div class="fig"></div></div><div class="cmeta"><div class="tt">フルアーマー・アタッカー</div><span class="basetag">+2キット</span><div class="au"><span class="ava"></span>kuro<span class="stat">♡256</span></div></div></div>
+    </div></div>
+    <div class="nav">
+      <div class="it"><span class="ic">⌂</span>ホーム</div><div class="it on"><span class="ic">◎</span>二次創作</div><div class="it"><span class="ic">▤</span>データベース</div><div class="it"><span class="ic">🛍</span>ストア</div><div class="it"><span class="ic">○</span>マイページ</div>
+    </div>
+  </div>
+
+  <!-- 共通詳細 -->
+  <div class="screen detail" id="detail">
+    <div class="dscroll">
+      <div class="appbar"><div class="b" onclick="closeD()">‹</div><div class="r"><div class="b">⤴</div><div class="b">⋯</div></div></div>
+      <div class="hero"><span class="hmt">🔧 作例</span><div class="fig"></div></div>
+      <div class="dbody">
+        <span class="label">30MS × 30MF</span>
+        <div class="dtitle">ライダースーツ ルルチェ＆ミコルル</div>
+        <div class="author"><div class="ava"></div><div class="nm">323号</div><div class="fo">フォロー</div></div>
+        <div class="react"><span>♡ <b>540</b></span><span>🔖 <b>128</b></span><span>💬 <b>32</b></span></div>
+        <div class="caption">夜明け前にしか現れないという、光の盟約の守り手。剣を持たぬ手に、彼女は何を託したのか——。ターボの装甲をベースに騎士の意匠を足しました。</div>
+        <div class="tagrow"><span class="tg">リーベルソードマン</span><span class="tg">騎士</span><span class="tg">#越境ビルド</span></div>
+        <div class="sec"><div class="sechd"><h2>使用キット（6点）</h2><a>すべて</a></div>
+          <div class="kit"><div class="kthumb"><div class="f"></div></div><div class="kinfo"><div class="kn">ターボコスチュームα [カラーB]</div><div class="kp">¥1,540</div></div><span class="own">✓ 所持</span></div>
+          <div class="kit"><div class="kthumb"><div class="f"></div></div><div class="kinfo"><div class="kn">ターボコスチュームβ [カラーA]</div><div class="kp">¥1,540</div></div><span class="own">✓ 所持</span></div>
+          <div class="kit"><div class="kthumb"><div class="f"></div></div><div class="kinfo"><div class="kn">エグザビークル キャノンバイクVer.</div><div class="kp">¥1,320</div></div><span class="miss">未所持</span></div>
+          <div class="needbar"><span class="tx">あと1点で作れる</span><button class="cta">不足キットを欲しいに追加</button></div>
+        </div>
+        <button class="baseCta">＋ この作例をベースに作る</button>
+        <div class="sec"><div class="sechd"><h2>系譜</h2></div>
+          <div class="lineage"><div class="from">ベースにした作例：<a>リーベルソードマン／原型 (aoi)</a></div>
+            <div class="derivenote">この作例から3人が派生を作っています</div>
+            <div class="drail"><div class="dcard"><div class="dthumb"><div class="f"></div></div><div class="dn">霜月りく</div></div><div class="dcard"><div class="dthumb"><div class="f"></div></div><div class="dn">mei</div></div><div class="dcard"><div class="dthumb"><div class="f"></div></div><div class="dn">kuro</div></div></div>
+          </div>
+        </div>
+        <div class="sec"><div class="sechd"><h2>同じキットの作品</h2><a>すべて</a></div>
+          <div class="rgrid"><div class="rc"><div class="rthumb"><div class="f"></div></div><div class="rn">フルアーマー・アタッカー</div><div class="ra">nagi_make</div></div><div class="rc"><div class="rthumb"><div class="f"></div></div><div class="rn">街角のメカ娘たち</div><div class="ra">mei</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="nav">
+      <div class="it"><span class="ic">⌂</span>ホーム</div><div class="it on"><span class="ic">◎</span>二次創作</div><div class="it"><span class="ic">▤</span>データベース</div><div class="it"><span class="ic">🛍</span>ストア</div><div class="it"><span class="ic">○</span>マイページ</div>
+    </div>
+  </div>
+
+</div>
+<script>
+  function openD(){document.getElementById('detail').classList.add('show');}
+  function closeD(){document.getElementById('detail').classList.remove('show');}
+</script>
+</body>
+</html>
