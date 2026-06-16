@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>パターン2：編集された入口｜30ML COMMUNITY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root{--brand:#0B5FFF;--cta:#E4007F;--ink:#111418;--ink-2:#6B7280;--ink-3:#9CA3AF;--line:#E8EAED;--bg:#F8F9FB;--soft:#F3F4F6;--ok:#15803D;--warn:#B45309;}
   *{box-sizing:border-box;margin:0;padding:0}
@@ -25,7 +25,6 @@
   .sechd h2{font-size:15px;font-weight:900}.sechd a{font-size:12px;color:var(--brand);font-weight:500}
   .sechd .ed{font-size:10.5px;color:var(--ink-3);font-weight:500;margin-left:6px}
 
-  /* 特集バナー */
   .hrail{display:flex;gap:12px;overflow-x:auto;padding:0 16px 4px;scrollbar-width:none}.hrail::-webkit-scrollbar{display:none}
   .hcard{flex:0 0 78%;aspect-ratio:16/10;border-radius:16px;position:relative;overflow:hidden;cursor:pointer;display:flex;align-items:flex-end;background:#0e1430;background-size:cover;background-position:center}
   .hcard .ov{position:relative;z-index:2;padding:14px;color:#fff}
@@ -33,7 +32,6 @@
   .hcard .ov .h{font-size:18px;font-weight:900;line-height:1.3}.hcard .ov .c{font-size:11px;opacity:.9;margin-top:4px}
   .hcard::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 20%,rgba(0,0,0,.75));z-index:1}
 
-  /* 作品カード横スクロール */
   .rail{display:flex;gap:10px;overflow-x:auto;padding:0 16px 4px;scrollbar-width:none}.rail::-webkit-scrollbar{display:none}
   .icard{flex:0 0 132px;cursor:pointer}
   .ithumb{width:132px;height:132px;border-radius:12px;position:relative;overflow:hidden;background:#1a1a2e}
@@ -42,7 +40,6 @@
   .icard .tt{font-size:12px;font-weight:700;line-height:1.35;margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .icard .au{font-size:10.5px;color:var(--ink-2);margin-top:3px}
 
-  /* SS リスト */
   .sslist{padding:0 16px}
   .ss{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}.ss:last-child{border-bottom:none}
   .ssthumb{flex:0 0 64px;width:64px;height:64px;border-radius:10px;overflow:hidden;position:relative;background:#1a1a2e}
@@ -50,9 +47,9 @@
   .ssbody{min-width:0}.ssbody .t{font-size:13px;font-weight:700;line-height:1.4}
   .ssbody .e{font-size:11px;color:#6B7280;line-height:1.6;margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .ssbody .f{font-size:10.5px;color:var(--ink-2);margin-top:5px;display:flex;gap:6px;align-items:center}
-  .ava{width:15px;height:15px;border-radius:50%;background:linear-gradient(135deg,#c7d2fe,#a5b4fc)}.wc{color:var(--ink-3)}
+  .ava{width:15px;height:15px;border-radius:50%;background:linear-gradient(135deg,#c7d2fe,#a5b4fc)}.wc2{color:var(--ink-3)}
 
-  /* detail */
+  /* ---- 作例詳細 ---- */
   .dscroll{flex:1;overflow-y:auto;scrollbar-width:none}.dscroll::-webkit-scrollbar{display:none}
   .appbar{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:linear-gradient(180deg,rgba(0,0,0,.32),transparent)}
   .appbar .b{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer}.appbar .r{display:flex;gap:8px}
@@ -69,11 +66,14 @@
   .tg{border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:12px;color:#374151;font-weight:500}
   .dsec{margin-bottom:20px}.dsechd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
   .dsechd h2{font-size:14.5px;font-weight:900}.dsechd a{font-size:12px;color:var(--brand)}
-  .kit{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--line)}.kit:last-of-type{border-bottom:none}
+  .kit{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:background .12s}
+  .kit:last-of-type{border-bottom:none}
+  .kit:active{background:var(--soft)}
   .kthumb{flex:0 0 46px;width:46px;height:46px;border-radius:9px;overflow:hidden;background:var(--soft)}
   .kthumb>img{width:100%;height:100%;object-fit:cover}
   .kinfo{flex:1;min-width:0}.kinfo .kn{font-size:12.5px;font-weight:500}.kinfo .kp{font-size:11.5px;color:var(--ink-2);margin-top:2px}
   .own{font-size:11px;font-weight:700;color:var(--ok)}.miss{font-size:11px;color:var(--ink-3)}
+  .kit-chev{font-size:16px;color:var(--ink-3);margin-left:2px}
   .needbar{background:#FFF7ED;border:1px solid #FCD9A8;border-radius:10px;padding:11px 13px;margin-top:11px;display:flex;align-items:center;justify-content:space-between}
   .needbar .tx{font-size:12.5px;font-weight:700;color:var(--warn)}
   .needbar .cta{background:var(--cta);color:#fff;border:none;border-radius:999px;padding:8px 16px;font-size:12px;font-weight:700;font-family:inherit}
@@ -89,6 +89,45 @@
   .rthumb>img{width:100%;height:100%;object-fit:cover}
   .rc .rn{font-size:12px;font-weight:700;margin-top:6px}.rc .ra{font-size:11px;color:var(--ink-2);margin-top:2px}
 
+  /* ---- キット詳細ボトムシート ---- */
+  .sheet-overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:20;opacity:0;pointer-events:none;transition:opacity .28s}
+  .sheet-overlay.show{opacity:1;pointer-events:auto}
+  .kit-sheet{position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:20px 20px 0 0;z-index:21;transform:translateY(100%);transition:transform .32s cubic-bezier(.4,0,.2,1);max-height:88%;display:flex;flex-direction:column}
+  .kit-sheet.show{transform:translateY(0)}
+  .sheet-handle-wrap{flex:0 0 auto;padding:10px 0 4px;display:flex;justify-content:center;cursor:pointer}
+  .sheet-handle{width:36px;height:4px;background:var(--line);border-radius:99px}
+  .sheet-inner{flex:1;overflow-y:auto;scrollbar-width:none;padding-bottom:20px}.sheet-inner::-webkit-scrollbar{display:none}
+  .kit-hero{aspect-ratio:1/1;overflow:hidden;position:relative;background:#0e0f13}
+  .kit-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .kit-body{padding:16px}
+  .kit-badge{display:inline-block;border:1.3px solid var(--brand);color:var(--brand);font-size:11px;font-weight:700;border-radius:7px;padding:2px 9px}
+  .kit-title-h{font-size:20px;font-weight:900;margin:7px 0 3px;line-height:1.3}
+  .pricebar{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+  .kprice{font-size:24px;font-weight:900}.kprice small{font-size:12px;font-weight:400;color:var(--ink-2);margin-left:3px}
+  .kstock{font-size:12px;font-weight:700;border-radius:999px;padding:4px 12px;border:1.5px solid var(--ok);color:var(--ok)}
+  .kcta{display:block;width:100%;margin-top:12px;border:none;border-radius:13px;padding:14px;font-size:14.5px;font-weight:700;color:#fff;background:var(--cta);font-family:inherit;cursor:pointer}
+  .ksubbtns{display:flex;gap:10px;margin-top:10px}
+  .ksubbtn{flex:1;border:none;border-radius:11px;padding:11px;background:var(--soft);font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer}
+  .lore{margin-top:20px;border-radius:14px;overflow:hidden;background:radial-gradient(130% 100% at 50% 0%,#16203a,#0a0d14);color:#ece5d2;position:relative}
+  .lore-inner{padding:16px}
+  .lore-seal{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;background:radial-gradient(circle,#2a3c63,#16223f);border:1.5px solid #c9a24a;display:flex;align-items:center;justify-content:center;font-size:14px;color:#e8c873}
+  .lore-cls{font-family:'Cinzel',serif;font-size:11px;font-weight:700;letter-spacing:.12em;color:#d8b15a;border:1px solid #b8923f;border-radius:4px;display:inline-block;padding:2px 10px;margin-bottom:9px}
+  .lore-nm{font-size:18px;font-weight:900;line-height:1.3}
+  .lore-en{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.1em;color:#8fb0e6;margin-top:3px}
+  .lore-rule{height:1px;background:linear-gradient(90deg,#b8923f,transparent);margin:12px 0}
+  .lore-flavor{font-size:12.5px;line-height:1.9;color:#d6cdb8}
+  .lore-official{display:inline-flex;align-items:center;gap:5px;font-size:10px;color:#9aa7c2;margin-top:12px}
+  .lore-official::before{content:"◆";color:#d8b15a;font-size:8px}
+  .kit-sec{margin-top:20px}.kit-sechd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px}
+  .kit-sechd h3{font-size:14px;font-weight:900}.kit-sechd a{font-size:12px;color:var(--brand)}
+  .kit-note{font-size:11px;color:var(--ink-2);margin-bottom:10px;line-height:1.6}
+  .wgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .wc .wt{aspect-ratio:1/1;border-radius:10px;overflow:hidden;position:relative;background:#0e0f13}
+  .wc .wt>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .wc .wn{font-size:11.5px;font-weight:700;margin-top:5px;line-height:1.3}
+  .wc .wa{font-size:10.5px;color:var(--ink-2);margin-top:2px}
+  .wc .wf{font-size:10px;color:var(--ink-3);font-style:italic;margin-top:2px}
+
   .nav{display:flex;justify-content:space-around;padding:8px 0 11px;border-top:1px solid var(--line);background:#fff;font-size:10px;color:var(--ink-3)}
   .nav .it{display:flex;flex-direction:column;align-items:center;gap:3px}.nav .it.on{color:var(--brand)}.nav .ic{font-size:17px;line-height:1}
 </style>
@@ -99,18 +138,12 @@
   <div class="screen list">
     <div class="head"><div class="t"><h1>二次創作</h1><div class="ic"><span>🔍</span><span>🔔</span></div></div></div>
     <div class="scrollwrap">
-
       <div class="sec"><div class="sechd"><h2>特集<span class="ed">編集部</span></h2><a>すべて</a></div>
         <div class="hrail">
-          <div class="hcard" style="background-image:url('img/w6.jpg')" onclick="openD()">
-            <div class="ov"><div class="k">PICK UP</div><div class="h">夜明けの騎士たち</div><div class="c">30MFから生まれた12の形</div></div>
-          </div>
-          <div class="hcard" style="background-image:url('img/w1.jpg')" onclick="openD()">
-            <div class="ov"><div class="k">SPECIAL</div><div class="h">メカ娘ミキシング名鑑</div><div class="c">越境ビルド傑作選</div></div>
-          </div>
+          <div class="hcard" style="background-image:url('img/w6.jpg')" onclick="openD()"><div class="ov"><div class="k">PICK UP</div><div class="h">夜明けの騎士たち</div><div class="c">30MFから生まれた12の形</div></div></div>
+          <div class="hcard" style="background-image:url('img/w1.jpg')" onclick="openD()"><div class="ov"><div class="k">SPECIAL</div><div class="h">メカ娘ミキシング名鑑</div><div class="c">越境ビルド傑作選</div></div></div>
         </div>
       </div>
-
       <div class="sec"><div class="sechd"><h2>🖼 イラスト</h2><a>すべて</a></div>
         <div class="rail">
           <div class="icard" onclick="openD()"><div class="ithumb"><img src="img/w5.jpg" alt=""></div><div class="tt">ブルーライダー型カスタム</div><div class="au">aoi</div></div>
@@ -118,7 +151,6 @@
           <div class="icard" onclick="openD()"><div class="ithumb"><img src="img/w3.jpg" alt=""></div><div class="tt">漆黒のシアナ</div><div class="au">霜月りく</div></div>
         </div>
       </div>
-
       <div class="sec"><div class="sechd"><h2>🎬 動画</h2><a>すべて</a></div>
         <div class="rail">
           <div class="icard" onclick="openD()"><div class="ithumb"><img src="img/w6.jpg" alt=""><span class="dur">0:42</span></div><div class="tt">三騎士の共闘</div><div class="au">323号</div></div>
@@ -126,17 +158,10 @@
           <div class="icard" onclick="openD()"><div class="ithumb"><img src="img/w4.jpg" alt=""><span class="dur">0:28</span></div><div class="tt">ツートンカラーMIX</div><div class="au">mei</div></div>
         </div>
       </div>
-
       <div class="sec"><div class="sechd"><h2>📖 SS・お話</h2><a>すべて</a></div>
         <div class="sslist">
-          <div class="ss" onclick="openD()">
-            <div class="ssthumb"><img src="img/w3.jpg" alt=""></div>
-            <div class="ssbody"><div class="t">漆黒の花嫁、夜に眠る</div><div class="e">整備ドックの灯が落ちる頃、彼女はいつも格納庫の隅でひとり機体を見上げていた——。</div><div class="f"><span class="ava"></span>nagi_make<span class="wc">· 3,200字</span></div></div>
-          </div>
-          <div class="ss" onclick="openD()">
-            <div class="ssthumb"><img src="img/w4.jpg" alt=""></div>
-            <div class="ssbody"><div class="t">左右の私、二つの名前</div><div class="e">同じ素体から、なぜこうも違う物語が生まれるのか。散らばる解釈を一人のファンが繋ぎ直す。</div><div class="f"><span class="ava"></span>323号<span class="wc">· 5,600字</span></div></div>
-          </div>
+          <div class="ss" onclick="openD()"><div class="ssthumb"><img src="img/w3.jpg" alt=""></div><div class="ssbody"><div class="t">漆黒の花嫁、夜に眠る</div><div class="e">整備ドックの灯が落ちる頃、彼女はいつも格納庫の隅でひとり機体を見上げていた——。</div><div class="f"><span class="ava"></span>nagi_make<span class="wc2">· 3,200字</span></div></div></div>
+          <div class="ss" onclick="openD()"><div class="ssthumb"><img src="img/w4.jpg" alt=""></div><div class="ssbody"><div class="t">左右の私、二つの名前</div><div class="e">同じ素体から、なぜこうも違う物語が生まれるのか。散らばる解釈を一人のファンが繋ぎ直す。</div><div class="f"><span class="ava"></span>323号<span class="wc2">· 5,600字</span></div></div></div>
         </div>
       </div>
       <div style="height:16px"></div>
@@ -144,7 +169,7 @@
     <div class="nav"><div class="it"><span class="ic">⌂</span>ホーム</div><div class="it on"><span class="ic">◎</span>二次創作</div><div class="it"><span class="ic">▤</span>データベース</div><div class="it"><span class="ic">🛍</span>ストア</div><div class="it"><span class="ic">○</span>マイページ</div></div>
   </div>
 
-  <!-- 詳細 -->
+  <!-- 作例詳細 -->
   <div class="screen detail" id="detail">
     <div class="dscroll">
       <div class="appbar"><div class="b" onclick="closeD()">‹</div><div class="r"><div class="b">⤴</div><div class="b">⋯</div></div></div>
@@ -154,18 +179,34 @@
         <div class="author"><div class="av"></div><div class="nm">nagi</div><div class="fo">フォロー</div></div>
         <div class="react"><span>♡ <b>540</b></span><span>🔖 <b>128</b></span><span>💬 <b>32</b></span></div>
         <div class="caption">紫の翼が夜に広がる瞬間、剣を持たぬ彼女の手に宿る力とは——。ドラゴニアのパーツとMSボディを組み合わせた越境ビルドです。</div>
-        <div class="tagrow">
-          <span class="tg">30MS</span><span class="tg">30MF</span><span class="tg">リーベルソードマン</span><span class="tg">騎士</span><span class="tg">#越境ビルド</span>
-        </div>
-        <div class="dsec"><div class="dsechd"><h2>使用キット（3点）</h2><a>すべて</a></div>
-          <div class="kit"><div class="kthumb"><img src="img/k1.jpg" alt=""></div><div class="kinfo"><div class="kn">30MF リーベルソードマン</div><div class="kp">¥2,420</div></div><span class="own">✓ 所持</span></div>
-          <div class="kit"><div class="kthumb"><img src="img/k3.jpg" alt=""></div><div class="kinfo"><div class="kn">30MF リーベルホーリーナイト(セレモニアル)</div><div class="kp">¥4,620</div></div><span class="own">✓ 所持</span></div>
-          <div class="kit"><div class="kthumb"><img src="img/k2.jpg" alt=""></div><div class="kinfo"><div class="kn">30MS SIS-K00 ミコルル[カラーB]</div><div class="kp">¥2,750</div></div><span class="miss">未所持</span></div>
+        <div class="tagrow"><span class="tg">30MS</span><span class="tg">30MF</span><span class="tg">リーベルソードマン</span><span class="tg">騎士</span><span class="tg">#越境ビルド</span></div>
+
+        <div class="dsec">
+          <div class="dsechd"><h2>使用キット（3点）</h2><a>すべて</a></div>
+          <div class="kit" onclick="openKit('k1')">
+            <div class="kthumb"><img src="img/k1.jpg" alt=""></div>
+            <div class="kinfo"><div class="kn">30MF リーベルソードマン</div><div class="kp">¥2,420</div></div>
+            <span class="own">✓ 所持</span><span class="kit-chev">›</span>
+          </div>
+          <div class="kit" onclick="openKit('k3')">
+            <div class="kthumb"><img src="img/k3.jpg" alt=""></div>
+            <div class="kinfo"><div class="kn">30MF リーベルホーリーナイト(セレモニアル)</div><div class="kp">¥4,620</div></div>
+            <span class="own">✓ 所持</span><span class="kit-chev">›</span>
+          </div>
+          <div class="kit" onclick="openKit('k2')">
+            <div class="kthumb"><img src="img/k2.jpg" alt=""></div>
+            <div class="kinfo"><div class="kn">30MS SIS-K00 ミコルル[カラーB]</div><div class="kp">¥2,750</div></div>
+            <span class="miss">未所持</span><span class="kit-chev">›</span>
+          </div>
           <div class="needbar"><span class="tx">あと1点で作れる</span><button class="cta">不足キットを欲しいに追加</button></div>
         </div>
+
         <button class="baseCta">＋ この作例をベースに作る</button>
-        <div class="dsec"><div class="dsechd"><h2>系譜</h2></div>
-          <div class="lineage"><div class="from">ベースにした作例：<a>30MF リーベルソードマン／原型 (aoi)</a></div>
+
+        <div class="dsec">
+          <div class="dsechd"><h2>系譜</h2></div>
+          <div class="lineage">
+            <div class="from">ベースにした作例：<a>30MF リーベルソードマン／原型 (aoi)</a></div>
             <div class="derivenote">この作例から3人が派生を作っています</div>
             <div class="drail">
               <div class="dcard"><div class="dthumb"><img src="img/w3.jpg" alt=""></div><div class="dn">霜月りく</div></div>
@@ -174,7 +215,9 @@
             </div>
           </div>
         </div>
-        <div class="dsec"><div class="dsechd"><h2>同じキットの作品</h2><a>すべて</a></div>
+
+        <div class="dsec">
+          <div class="dsechd"><h2>同じキットの作品</h2><a>すべて</a></div>
           <div class="rgrid">
             <div class="rc"><div class="rthumb"><img src="img/w5.jpg" alt=""></div><div class="rn">ブルーライダー型カスタム</div><div class="ra">aoi</div></div>
             <div class="rc"><div class="rthumb"><img src="img/w8.jpg" alt=""></div><div class="rn">ネオン・スナイパー</div><div class="ra">kuro</div></div>
@@ -185,10 +228,97 @@
     <div class="nav"><div class="it"><span class="ic">⌂</span>ホーム</div><div class="it on"><span class="ic">◎</span>二次創作</div><div class="it"><span class="ic">▤</span>データベース</div><div class="it"><span class="ic">🛍</span>ストア</div><div class="it"><span class="ic">○</span>マイページ</div></div>
   </div>
 
+  <!-- キット詳細ボトムシート -->
+  <div class="sheet-overlay" id="kitOverlay" onclick="closeKit()"></div>
+  <div class="kit-sheet" id="kitSheet">
+    <div class="sheet-handle-wrap" onclick="closeKit()"><div class="sheet-handle"></div></div>
+    <div class="sheet-inner">
+      <div class="kit-hero"><img id="kitHeroImg" src="" alt=""></div>
+      <div class="kit-body">
+        <span class="kit-badge" id="kitLabel"></span>
+        <div class="kit-title-h" id="kitTitleH"></div>
+        <div class="pricebar"><div class="kprice" id="kitPrice"></div><div class="kstock">発売中</div></div>
+        <button class="kcta">購入する</button>
+        <div class="ksubbtns"><button class="ksubbtn">📦 持ってる</button><button class="ksubbtn">🔖 欲しい</button></div>
+        <div class="lore">
+          <div class="lore-inner">
+            <div class="lore-seal">⚜</div>
+            <div class="lore-cls" id="kitClass"></div>
+            <div class="lore-nm" id="kitLoreNm"></div>
+            <div class="lore-en" id="kitLoreEn"></div>
+            <div class="lore-rule"></div>
+            <div class="lore-flavor" id="kitFlavor"></div>
+            <div class="lore-official">公式設定</div>
+          </div>
+        </div>
+        <div class="kit-sec">
+          <div class="kit-sechd"><h3>このキットで作れる</h3><a>すべて</a></div>
+          <div class="kit-note">公式設定をベースに、つくり手それぞれの解釈が生まれています。</div>
+          <div class="wgrid" id="kitWorksGrid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 <script>
+  if (sessionStorage.getItem("30ml_auth") !== "1") { location.href = "index.html"; }
+
+  const KITS = {
+    k1: {
+      img:'img/k1.jpg', label:'30MF', title:'リーベルソードマン', price:'¥2,420',
+      cls:'CLASS I', loreNm:'リーベルソードマン', loreEn:'LIBER SWORDMAN',
+      flavor:'剣術に長け、闘技場〈コロシアム〉で戦うことに特化した戦士。片手剣や両手剣など多様な剣を扱い、攻撃と防御のバランスに優れる。技の正確さと冷静な判断力を持ち、単独でも仲間と連携しても高い実力を発揮する。',
+      works:[
+        {img:'img/w5.jpg', title:'ブルーライダー型カスタム', author:'aoi', flav:'「光の盟約を守る守護者」'},
+        {img:'img/w3.jpg', title:'漆黒のシアナ', author:'霜月りく', flav:'「闇に転じた、同じ顔」'},
+      ]
+    },
+    k2: {
+      img:'img/k2.jpg', label:'30MS', title:'SIS-K00 ミコルル[カラーB]', price:'¥2,750',
+      cls:'SIS', loreNm:'ミコルル', loreEn:'SIS-K00 MICOLUL',
+      flavor:'機動性と近距離戦に優れた次世代型システム。独自の感応フィールドを持ち、装備の換装を瞬時に行う能力を持つ。その瞳に宿る意志は、設計者すら想定しなかった——。',
+      works:[
+        {img:'img/w1.jpg', title:'闇翼の槍使い', author:'nagi', flav:'「翼と槍、夜の守護者」'},
+        {img:'img/w8.jpg', title:'ネオン・スナイパー', author:'kuro', flav:'「街の闇を撃ち抜く」'},
+      ]
+    },
+    k3: {
+      img:'img/k3.jpg', label:'30MF', title:'リーベルホーリーナイト(セレモニアル)', price:'¥4,620',
+      cls:'CLASS III', loreNm:'リーベルホーリーナイト', loreEn:'LIBER HOLY KNIGHT',
+      flavor:'聖なる儀式のために作られた特別仕様の騎士。黄金の装甲に刻まれた紋章は神聖な誓いを示し、式典においてのみ纏う完全なる礼装形態。その輝きは仲間の士気を高め、敵の心に畏怖を与える。',
+      works:[
+        {img:'img/w6.jpg', title:'三騎士の共闘', author:'323号', flav:'「三つの光、ひとつの誓い」'},
+        {img:'img/w7.jpg', title:'翠の精霊騎士', author:'mei', flav:'「聖なる森の守り手」'},
+      ]
+    }
+  };
+
   function openD(){document.getElementById('detail').classList.add('show');}
   function closeD(){document.getElementById('detail').classList.remove('show');}
+
+  function openKit(id) {
+    const k = KITS[id]; if (!k) return;
+    document.getElementById('kitHeroImg').src = k.img;
+    document.getElementById('kitLabel').textContent = k.label;
+    document.getElementById('kitTitleH').textContent = k.title;
+    document.getElementById('kitPrice').innerHTML = k.price + '<small>税込</small>';
+    document.getElementById('kitClass').textContent = k.cls;
+    document.getElementById('kitLoreNm').textContent = k.loreNm;
+    document.getElementById('kitLoreEn').textContent = k.loreEn;
+    document.getElementById('kitFlavor').textContent = k.flavor;
+    document.getElementById('kitWorksGrid').innerHTML = k.works.map(w =>
+      `<div class="wc"><div class="wt"><img src="${w.img}" alt=""></div><div class="wn">${w.title}</div><div class="wa">${w.author}</div><div class="wf">${w.flav}</div></div>`
+    ).join('');
+    document.getElementById('kitOverlay').classList.add('show');
+    document.getElementById('kitSheet').classList.add('show');
+    document.querySelector('.sheet-inner').scrollTop = 0;
+  }
+
+  function closeKit() {
+    document.getElementById('kitOverlay').classList.remove('show');
+    document.getElementById('kitSheet').classList.remove('show');
+  }
 </script>
 </body>
 </html>

@@ -149,6 +149,8 @@
 
 </div>
 <script>
+  if (sessionStorage.getItem("30ml_auth") !== "1") { location.href = "index.html"; }
+
   function openD(){document.getElementById('detail').classList.add('show');}
   function closeD(){document.getElementById('detail').classList.remove('show');}
 </script>
