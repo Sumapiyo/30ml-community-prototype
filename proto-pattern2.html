@@ -25,47 +25,41 @@
   .sechd h2{font-size:15px;font-weight:900}.sechd a{font-size:12px;color:var(--brand);font-weight:500}
   .sechd .ed{font-size:10.5px;color:var(--ink-3);font-weight:500;margin-left:6px}
 
+  /* 特集バナー */
   .hrail{display:flex;gap:12px;overflow-x:auto;padding:0 16px 4px;scrollbar-width:none}.hrail::-webkit-scrollbar{display:none}
-  .hcard{flex:0 0 78%;aspect-ratio:16/10;border-radius:16px;position:relative;overflow:hidden;cursor:pointer;display:flex;align-items:flex-end}
-  .hcard .ov{position:relative;z-index:1;padding:14px;color:#fff}
+  .hcard{flex:0 0 78%;aspect-ratio:16/10;border-radius:16px;position:relative;overflow:hidden;cursor:pointer;display:flex;align-items:flex-end;background:#0e1430;background-size:cover;background-position:center}
+  .hcard .ov{position:relative;z-index:2;padding:14px;color:#fff}
   .hcard .ov .k{font-size:10.5px;font-weight:700;letter-spacing:.08em;opacity:.85;margin-bottom:3px}
   .hcard .ov .h{font-size:18px;font-weight:900;line-height:1.3}.hcard .ov .c{font-size:11px;opacity:.9;margin-top:4px}
-  .hcard::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.72))}
-  .hc1{background:radial-gradient(120% 90% at 30% 20%,#2d3a6b,#0e1430)}.hc2{background:radial-gradient(120% 90% at 30% 20%,#6b2d45,#2a0e18)}
+  .hcard::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 20%,rgba(0,0,0,.75));z-index:1}
 
+  /* 作品カード横スクロール */
   .rail{display:flex;gap:10px;overflow-x:auto;padding:0 16px 4px;scrollbar-width:none}.rail::-webkit-scrollbar{display:none}
   .icard{flex:0 0 132px;cursor:pointer}
-  .ithumb{width:132px;height:132px;border-radius:12px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-  .ithumb .fig{width:40%;aspect-ratio:1/2;border-radius:36px 36px 14px 14px;position:relative}
-  .ithumb .fig::before{content:"";position:absolute;top:-12%;left:50%;transform:translateX(-50%);width:52%;aspect-ratio:1/1;border-radius:50%;background:inherit;filter:brightness(1.1)}
-  .dur{position:absolute;right:6px;bottom:6px;background:rgba(0,0,0,.7);color:#fff;font-size:9.5px;padding:1px 5px;border-radius:4px}
+  .ithumb{width:132px;height:132px;border-radius:12px;position:relative;overflow:hidden;background:#1a1a2e}
+  .ithumb>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .dur{position:absolute;right:6px;bottom:6px;background:rgba(0,0,0,.7);color:#fff;font-size:9.5px;padding:1px 5px;border-radius:4px;z-index:1}
   .icard .tt{font-size:12px;font-weight:700;line-height:1.35;margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .icard .au{font-size:10.5px;color:var(--ink-2);margin-top:3px}
 
+  /* SS リスト */
   .sslist{padding:0 16px}
   .ss{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}.ss:last-child{border-bottom:none}
-  .ssthumb{flex:0 0 64px;width:64px;height:64px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:radial-gradient(110% 80% at 50% 12%,#FDEEF3,#F7D9E5)}
-  .ssthumb .fig{width:42%;aspect-ratio:1/1.8;border-radius:18px 18px 8px 8px;background:linear-gradient(160deg,#ff8aa1,#c01d49)}
+  .ssthumb{flex:0 0 64px;width:64px;height:64px;border-radius:10px;overflow:hidden;position:relative;background:#1a1a2e}
+  .ssthumb>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .ssbody{min-width:0}.ssbody .t{font-size:13px;font-weight:700;line-height:1.4}
   .ssbody .e{font-size:11px;color:#6B7280;line-height:1.6;margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
   .ssbody .f{font-size:10.5px;color:var(--ink-2);margin-top:5px;display:flex;gap:6px;align-items:center}
   .ava{width:15px;height:15px;border-radius:50%;background:linear-gradient(135deg,#c7d2fe,#a5b4fc)}.wc{color:var(--ink-3)}
 
-  .g1{background:radial-gradient(110% 80% at 50% 12%,#EAF1FF,#D6E4FF)}.g1 .fig{background:linear-gradient(160deg,#7fb2ff,#1d4ed8)}
-  .g3{background:radial-gradient(110% 80% at 50% 12%,#EFF7EE,#DBEEDB)}.g3 .fig{background:linear-gradient(160deg,#86d99c,#1f7a3d)}
-  .g4{background:radial-gradient(110% 80% at 50% 12%,#F3F0FB,#E6DEF8)}.g4 .fig{background:linear-gradient(160deg,#c4b5fd,#6d28d9)}
-  .g5{background:radial-gradient(110% 80% at 50% 12%,#FFF7E8,#FCEBC8)}.g5 .fig{background:linear-gradient(160deg,#fcd34d,#b45309)}
-
-  /* detail（パターン1と同一） */
+  /* detail */
   .dscroll{flex:1;overflow-y:auto;scrollbar-width:none}.dscroll::-webkit-scrollbar{display:none}
   .appbar{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:linear-gradient(180deg,rgba(0,0,0,.32),transparent)}
   .appbar .b{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer}.appbar .r{display:flex;gap:8px}
-  .hero{position:relative;aspect-ratio:1/1;background:#0e0f13;display:flex;align-items:center;justify-content:center}
-  .hero .fig{width:42%;aspect-ratio:1/2.1;border-radius:60px 60px 26px 26px;background:linear-gradient(160deg,#7fb2ff,#1d4ed8);position:relative}
-  .hero .fig::before{content:"";position:absolute;top:-13%;left:50%;transform:translateX(-50%);width:52%;aspect-ratio:1/1;border-radius:50%;background:inherit;filter:brightness(1.12)}
-  .hmt{position:absolute;top:54px;left:14px;background:rgba(255,255,255,.92);border-radius:7px;padding:3px 9px;font-size:11px;font-weight:700}
+  .hero{position:relative;aspect-ratio:1/1;background:#0e0f13;overflow:hidden}
+  .hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hmt{position:absolute;top:54px;left:14px;background:rgba(255,255,255,.92);border-radius:7px;padding:3px 9px;font-size:11px;font-weight:700;z-index:1}
   .dbody{padding:16px}
-  .label{display:inline-block;border:1.3px solid var(--brand);color:var(--brand);font-size:11px;font-weight:700;border-radius:7px;padding:2px 9px;margin-bottom:7px}
   .dtitle{font-size:20px;font-weight:900;line-height:1.35}
   .author{display:flex;align-items:center;gap:9px;margin-top:12px}.author .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#c7d2fe,#a5b4fc)}
   .author .nm{font-size:13.5px;font-weight:700}.author .fo{margin-left:auto;border:1.5px solid var(--brand);color:var(--brand);border-radius:999px;padding:6px 16px;font-size:12.5px;font-weight:700}
@@ -76,8 +70,8 @@
   .dsec{margin-bottom:20px}.dsechd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
   .dsechd h2{font-size:14.5px;font-weight:900}.dsechd a{font-size:12px;color:var(--brand)}
   .kit{display:flex;align-items:center;gap:11px;padding:9px 0;border-bottom:1px solid var(--line)}.kit:last-of-type{border-bottom:none}
-  .kthumb{flex:0 0 46px;width:46px;height:46px;border-radius:9px;background:var(--soft);display:flex;align-items:center;justify-content:center}
-  .kthumb .f{width:42%;aspect-ratio:1/1.8;border-radius:13px 13px 6px 6px;background:linear-gradient(160deg,#9aa1ad,#3b404b)}
+  .kthumb{flex:0 0 46px;width:46px;height:46px;border-radius:9px;overflow:hidden;background:var(--soft)}
+  .kthumb>img{width:100%;height:100%;object-fit:cover}
   .kinfo{flex:1;min-width:0}.kinfo .kn{font-size:12.5px;font-weight:500}.kinfo .kp{font-size:11.5px;color:var(--ink-2);margin-top:2px}
   .own{font-size:11px;font-weight:700;color:var(--ok)}.miss{font-size:11px;color:var(--ink-3)}
   .needbar{background:#FFF7ED;border:1px solid #FCD9A8;border-radius:10px;padding:11px 13px;margin-top:11px;display:flex;align-items:center;justify-content:space-between}
@@ -87,11 +81,12 @@
   .lineage{background:var(--soft);border-radius:12px;padding:13px}.lineage .from{font-size:12px;color:var(--ink-2);margin-bottom:9px}.lineage .from a{color:var(--brand);font-weight:700}
   .derivenote{font-size:12px;color:var(--ok);font-weight:700;margin-bottom:9px}
   .drail{display:flex;gap:9px;overflow-x:auto;scrollbar-width:none}.drail::-webkit-scrollbar{display:none}
-  .dcard{flex:0 0 92px}.dthumb{width:92px;height:92px;border-radius:9px;background:#0e0f13;display:flex;align-items:center;justify-content:center}
-  .dthumb .f{width:42%;aspect-ratio:1/2;border-radius:14px 14px 6px 6px;background:linear-gradient(160deg,#ff8aa1,#c01d49)}.dcard .dn{font-size:10.5px;color:var(--ink-2);margin-top:4px}
+  .dcard{flex:0 0 92px}.dthumb{width:92px;height:92px;border-radius:9px;overflow:hidden;background:#0e0f13}
+  .dthumb>img{width:100%;height:100%;object-fit:cover}
+  .dcard .dn{font-size:10.5px;color:var(--ink-2);margin-top:4px}
   .rgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .rthumb{aspect-ratio:1/1;border-radius:11px;background:#0e0f13;display:flex;align-items:center;justify-content:center}
-  .rthumb .f{width:40%;aspect-ratio:1/2;border-radius:18px 18px 8px 8px;background:linear-gradient(160deg,#86d99c,#1f7a3d)}
+  .rthumb{aspect-ratio:1/1;border-radius:11px;overflow:hidden;background:#0e0f13}
+  .rthumb>img{width:100%;height:100%;object-fit:cover}
   .rc .rn{font-size:12px;font-weight:700;margin-top:6px}.rc .ra{font-size:11px;color:var(--ink-2);margin-top:2px}
 
   .nav{display:flex;justify-content:space-around;padding:8px 0 11px;border-top:1px solid var(--line);background:#fff;font-size:10px;color:var(--ink-3)}
@@ -104,30 +99,44 @@
   <div class="screen list">
     <div class="head"><div class="t"><h1>二次創作</h1><div class="ic"><span>🔍</span><span>🔔</span></div></div></div>
     <div class="scrollwrap">
+
       <div class="sec"><div class="sechd"><h2>特集<span class="ed">編集部</span></h2><a>すべて</a></div>
         <div class="hrail">
-          <div class="hcard hc1" onclick="openD()"><div class="ov"><div class="k">PICK UP</div><div class="h">夜明けの騎士たち</div><div class="c">同じ素体から生まれた12の物語</div></div></div>
-          <div class="hcard hc2" onclick="openD()"><div class="ov"><div class="k">SPECIAL</div><div class="h">メカ娘ミキシング名鑑</div><div class="c">越境ビルド傑作選</div></div></div>
+          <div class="hcard" style="background-image:url('img/w6.jpg')" onclick="openD()">
+            <div class="ov"><div class="k">PICK UP</div><div class="h">夜明けの騎士たち</div><div class="c">30MFから生まれた12の形</div></div>
+          </div>
+          <div class="hcard" style="background-image:url('img/w1.jpg')" onclick="openD()">
+            <div class="ov"><div class="k">SPECIAL</div><div class="h">メカ娘ミキシング名鑑</div><div class="c">越境ビルド傑作選</div></div>
+          </div>
         </div>
       </div>
+
       <div class="sec"><div class="sechd"><h2>🖼 イラスト</h2><a>すべて</a></div>
         <div class="rail">
-          <div class="icard" onclick="openD()"><div class="ithumb g1"><div class="fig"></div></div><div class="tt">夜明けの騎士・ルルチェ</div><div class="au">霜月りく</div></div>
-          <div class="icard" onclick="openD()"><div class="ithumb g5"><div class="fig"></div></div><div class="tt">街角のメカ娘たち</div><div class="au">mei</div></div>
-          <div class="icard" onclick="openD()"><div class="ithumb g1"><div class="fig"></div></div><div class="tt">堕ちた魔剣士／別解釈</div><div class="au">aoi</div></div>
+          <div class="icard" onclick="openD()"><div class="ithumb"><img src="img/w5.jpg" alt=""></div><div class="tt">ブルーライダー型カスタム</div><div class="au">aoi</div></div>
+          <div class="icard" onclick="openD()"><div class="ithumb"><img src="img/w7.jpg" alt=""></div><div class="tt">翠の精霊騎士</div><div class="au">mei</div></div>
+          <div class="icard" onclick="openD()"><div class="ithumb"><img src="img/w3.jpg" alt=""></div><div class="tt">漆黒のシアナ</div><div class="au">霜月りく</div></div>
         </div>
       </div>
+
       <div class="sec"><div class="sechd"><h2>🎬 動画</h2><a>すべて</a></div>
         <div class="rail">
-          <div class="icard" onclick="openD()"><div class="ithumb g4"><div class="fig"></div><span class="dur">0:42</span></div><div class="tt">魔剣士アクション</div><div class="au">323号</div></div>
-          <div class="icard" onclick="openD()"><div class="ithumb g3"><div class="fig"></div><span class="dur">1:15</span></div><div class="tt">塗装タイムラプス</div><div class="au">kuro</div></div>
-          <div class="icard" onclick="openD()"><div class="ithumb g5"><div class="fig"></div><span class="dur">0:28</span></div><div class="tt">可動域チェック</div><div class="au">mei</div></div>
+          <div class="icard" onclick="openD()"><div class="ithumb"><img src="img/w6.jpg" alt=""><span class="dur">0:42</span></div><div class="tt">三騎士の共闘</div><div class="au">323号</div></div>
+          <div class="icard" onclick="openD()"><div class="ithumb"><img src="img/w8.jpg" alt=""><span class="dur">1:15</span></div><div class="tt">ネオン・スナイパー</div><div class="au">kuro</div></div>
+          <div class="icard" onclick="openD()"><div class="ithumb"><img src="img/w4.jpg" alt=""><span class="dur">0:28</span></div><div class="tt">ツートンカラーMIX</div><div class="au">mei</div></div>
         </div>
       </div>
+
       <div class="sec"><div class="sechd"><h2>📖 SS・お話</h2><a>すべて</a></div>
         <div class="sslist">
-          <div class="ss" onclick="openD()"><div class="ssthumb"><div class="fig"></div></div><div class="ssbody"><div class="t">鋼の花嫁、夜明けを待つ</div><div class="e">整備ドックの灯が落ちる頃、彼女はいつも格納庫の隅でひとり機体を見上げていた——。</div><div class="f"><span class="ava"></span>nagi_make<span class="wc">· 3,200字</span></div></div></div>
-          <div class="ss" onclick="openD()"><div class="ssthumb"><div class="fig"></div></div><div class="ssbody"><div class="t">堕ちた魔剣士についての考察</div><div class="e">同じ素体から、なぜこうも違う物語が生まれるのか。散らばる解釈を一人のファンが繋ぎ直す。</div><div class="f"><span class="ava"></span>323号<span class="wc">· 5,600字</span></div></div></div>
+          <div class="ss" onclick="openD()">
+            <div class="ssthumb"><img src="img/w3.jpg" alt=""></div>
+            <div class="ssbody"><div class="t">漆黒の花嫁、夜に眠る</div><div class="e">整備ドックの灯が落ちる頃、彼女はいつも格納庫の隅でひとり機体を見上げていた——。</div><div class="f"><span class="ava"></span>nagi_make<span class="wc">· 3,200字</span></div></div>
+          </div>
+          <div class="ss" onclick="openD()">
+            <div class="ssthumb"><img src="img/w4.jpg" alt=""></div>
+            <div class="ssbody"><div class="t">左右の私、二つの名前</div><div class="e">同じ素体から、なぜこうも違う物語が生まれるのか。散らばる解釈を一人のファンが繋ぎ直す。</div><div class="f"><span class="ava"></span>323号<span class="wc">· 5,600字</span></div></div>
+          </div>
         </div>
       </div>
       <div style="height:16px"></div>
@@ -135,33 +144,41 @@
     <div class="nav"><div class="it"><span class="ic">⌂</span>ホーム</div><div class="it on"><span class="ic">◎</span>二次創作</div><div class="it"><span class="ic">▤</span>データベース</div><div class="it"><span class="ic">🛍</span>ストア</div><div class="it"><span class="ic">○</span>マイページ</div></div>
   </div>
 
-  <!-- 共通詳細（パターン1と同一） -->
+  <!-- 詳細 -->
   <div class="screen detail" id="detail">
     <div class="dscroll">
       <div class="appbar"><div class="b" onclick="closeD()">‹</div><div class="r"><div class="b">⤴</div><div class="b">⋯</div></div></div>
-      <div class="hero"><span class="hmt">🔧 作例</span><div class="fig"></div></div>
+      <div class="hero"><span class="hmt">🔧 作例</span><img src="img/w1.jpg" alt=""></div>
       <div class="dbody">
-        <span class="label">30MS × 30MF</span>
-        <div class="dtitle">ライダースーツ ルルチェ＆ミコルル</div>
-        <div class="author"><div class="av"></div><div class="nm">323号</div><div class="fo">フォロー</div></div>
+        <div class="dtitle">闇翼の槍使い</div>
+        <div class="author"><div class="av"></div><div class="nm">nagi</div><div class="fo">フォロー</div></div>
         <div class="react"><span>♡ <b>540</b></span><span>🔖 <b>128</b></span><span>💬 <b>32</b></span></div>
-        <div class="caption">夜明け前にしか現れないという、光の盟約の守り手。剣を持たぬ手に、彼女は何を託したのか——。ターボの装甲をベースに騎士の意匠を足しました。</div>
-        <div class="tagrow"><span class="tg">リーベルソードマン</span><span class="tg">騎士</span><span class="tg">#越境ビルド</span></div>
-        <div class="dsec"><div class="dsechd"><h2>使用キット（6点）</h2><a>すべて</a></div>
-          <div class="kit"><div class="kthumb"><div class="f"></div></div><div class="kinfo"><div class="kn">ターボコスチュームα [カラーB]</div><div class="kp">¥1,540</div></div><span class="own">✓ 所持</span></div>
-          <div class="kit"><div class="kthumb"><div class="f"></div></div><div class="kinfo"><div class="kn">ターボコスチュームβ [カラーA]</div><div class="kp">¥1,540</div></div><span class="own">✓ 所持</span></div>
-          <div class="kit"><div class="kthumb"><div class="f"></div></div><div class="kinfo"><div class="kn">エグザビークル キャノンバイクVer.</div><div class="kp">¥1,320</div></div><span class="miss">未所持</span></div>
+        <div class="caption">紫の翼が夜に広がる瞬間、剣を持たぬ彼女の手に宿る力とは——。ドラゴニアのパーツとMSボディを組み合わせた越境ビルドです。</div>
+        <div class="tagrow">
+          <span class="tg">30MS</span><span class="tg">30MF</span><span class="tg">リーベルソードマン</span><span class="tg">騎士</span><span class="tg">#越境ビルド</span>
+        </div>
+        <div class="dsec"><div class="dsechd"><h2>使用キット（3点）</h2><a>すべて</a></div>
+          <div class="kit"><div class="kthumb"><img src="img/k1.jpg" alt=""></div><div class="kinfo"><div class="kn">30MF リーベルソードマン</div><div class="kp">¥2,420</div></div><span class="own">✓ 所持</span></div>
+          <div class="kit"><div class="kthumb"><img src="img/k3.jpg" alt=""></div><div class="kinfo"><div class="kn">30MF リーベルホーリーナイト(セレモニアル)</div><div class="kp">¥4,620</div></div><span class="own">✓ 所持</span></div>
+          <div class="kit"><div class="kthumb"><img src="img/k2.jpg" alt=""></div><div class="kinfo"><div class="kn">30MS SIS-K00 ミコルル[カラーB]</div><div class="kp">¥2,750</div></div><span class="miss">未所持</span></div>
           <div class="needbar"><span class="tx">あと1点で作れる</span><button class="cta">不足キットを欲しいに追加</button></div>
         </div>
         <button class="baseCta">＋ この作例をベースに作る</button>
         <div class="dsec"><div class="dsechd"><h2>系譜</h2></div>
-          <div class="lineage"><div class="from">ベースにした作例：<a>リーベルソードマン／原型 (aoi)</a></div>
+          <div class="lineage"><div class="from">ベースにした作例：<a>30MF リーベルソードマン／原型 (aoi)</a></div>
             <div class="derivenote">この作例から3人が派生を作っています</div>
-            <div class="drail"><div class="dcard"><div class="dthumb"><div class="f"></div></div><div class="dn">霜月りく</div></div><div class="dcard"><div class="dthumb"><div class="f"></div></div><div class="dn">mei</div></div><div class="dcard"><div class="dthumb"><div class="f"></div></div><div class="dn">kuro</div></div></div>
+            <div class="drail">
+              <div class="dcard"><div class="dthumb"><img src="img/w3.jpg" alt=""></div><div class="dn">霜月りく</div></div>
+              <div class="dcard"><div class="dthumb"><img src="img/w7.jpg" alt=""></div><div class="dn">mei</div></div>
+              <div class="dcard"><div class="dthumb"><img src="img/w4.jpg" alt=""></div><div class="dn">kuro</div></div>
+            </div>
           </div>
         </div>
         <div class="dsec"><div class="dsechd"><h2>同じキットの作品</h2><a>すべて</a></div>
-          <div class="rgrid"><div class="rc"><div class="rthumb"><div class="f"></div></div><div class="rn">フルアーマー・アタッカー</div><div class="ra">nagi_make</div></div><div class="rc"><div class="rthumb"><div class="f"></div></div><div class="rn">街角のメカ娘たち</div><div class="ra">mei</div></div></div>
+          <div class="rgrid">
+            <div class="rc"><div class="rthumb"><img src="img/w5.jpg" alt=""></div><div class="rn">ブルーライダー型カスタム</div><div class="ra">aoi</div></div>
+            <div class="rc"><div class="rthumb"><img src="img/w8.jpg" alt=""></div><div class="rn">ネオン・スナイパー</div><div class="ra">kuro</div></div>
+          </div>
         </div>
       </div>
     </div>
